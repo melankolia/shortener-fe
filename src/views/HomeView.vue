@@ -28,21 +28,40 @@
           <input
             type="text"
             id="simple-search"
-            class="bg-gray-50 border-2 h-14 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-24 pr-2"
+            class="border-2 h-14 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-24 pr-2"
             placeholder="Paste long url and short it"
             required
           />
         </div>
         <button
-          class="rounded-lg px-10 h-14 w-full md:w-auto mt-4 md:mt-0"
-          style="background-color: #3ed078"
+          @click="handleClick"
+          class="btn-shorten flex flex-row justify-center items-center rounded-lg px-4 h-14 w-full md:w-1/6 mt-4 md:mt-0 bg-green-1 hover:bg-white text-white hover:text-green-1 border-2 ring-green-1 border-green-1 transition duration-150 ease-in-out"
         >
-          <span class="caption-1 text-white"> Shorten </span>
+          <Transition>
+            <div v-if="loading">
+              <img class="mr-2 svg-hover" src="@/assets/loading-green.svg" />
+              <img class="mr-2 svg-default" src="@/assets/loading-white.svg" />
+            </div>
+          </Transition>
+          <span class="caption-1 font-semibold"> Shorten </span>
         </button>
       </div>
     </div>
   </div>
 </template>
+
+<script setup lang="ts">
+import { ref } from "vue";
+import type { Ref } from "vue";
+
+const loading: Ref<boolean> = ref(false);
+const handleClick = (): void => {
+  loading.value = true;
+  setTimeout(() => {
+    loading.value = false;
+  }, 1500);
+};
+</script>
 
 <style scoped>
 .header {
@@ -52,5 +71,17 @@
 
 .shadow-input {
   box-shadow: 0px 4px 15px rgba(1, 17, 183, 0.06);
+}
+
+.svg-hover {
+  display: none;
+}
+
+.btn-shorten:hover:deep(.svg-hover) {
+  display: block;
+}
+
+.btn-shorten:hover:deep(.svg-default) {
+  display: none;
 }
 </style>

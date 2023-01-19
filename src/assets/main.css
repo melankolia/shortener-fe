@@ -8,6 +8,16 @@
   font-weight: normal;
 }
 
+.v-enter-active,
+.v-leave-active {
+  transition: opacity 0.3s ease;
+}
+
+.v-enter-from,
+.v-leave-to {
+  opacity: 0;
+}
+
 .header-1 {
   font-family: "Poppins";
   font-style: normal;
@@ -28,7 +38,7 @@
   font-family: "Poppins";
   font-style: normal;
   font-weight: 400;
-  font-size: 16px;
+  font-size: 14px;
   line-height: 30px;
   color: #b9b9b9;
 }
