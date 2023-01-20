@@ -19,9 +19,12 @@
       class="bg-white rounded-lg absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-3/4 h-52 shadow-input flex flex-col justify-center"
     >
       <div class="flex flex-col md:flex-row space-x-0 md:space-x-7 px-10">
-        <div class="relative w-full">
+        <div
+          class="flex flex-row border-2 h-14 border-gray-300 text-gray-900 text-sm rounded-lg w-full"
+        >
           <div
-            class="flex z-50 absolute inset-y-0 left-0 items-center px-6 pointer-events-none border-r-2 border-gray-300 my-3 focus:ring-blue-500 focus:border-blue-500"
+            @click="handleCopy"
+            class="hover:cursor-pointer flex inset-y-0 items-center px-6 border-r-2 border-gray-300 my-3"
           >
             <img style="width: 30px; height: 30px" src="@/assets/clip.svg" />
           </div>
@@ -29,7 +32,7 @@
             v-model="inputLink"
             type="text"
             id="simple-search"
-            class="border-2 h-14 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-24 pr-2"
+            class="w-full pl-4 rounded-r-lg outline-none"
             placeholder="Paste long url and short it"
             required
           />
@@ -75,6 +78,19 @@ const handleClick = async (): Promise<void> => {
     console.error(error);
   } finally {
     loading.value = false;
+  }
+};
+
+const handleCopy = (): void => {
+  let codeToCopy = document.querySelector("#simple-search") as HTMLInputElement;
+  codeToCopy.setAttribute("type", "text");
+  codeToCopy.select();
+  try {
+    var successful = document.execCommand("copy");
+    var msg = successful ? "successful" : "unsuccessful";
+    alert(`Copy to clipboard ${msg}`);
+  } catch (err) {
+    alert(`Oops, unable to copy`);
   }
 };
 </script>
