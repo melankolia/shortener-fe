@@ -85,13 +85,7 @@ const handleCopy = (): void => {
   let codeToCopy = document.querySelector("#simple-search") as HTMLInputElement;
   codeToCopy.setAttribute("type", "text");
   codeToCopy.select();
-  try {
-    var successful = document.execCommand("copy");
-    var msg = successful ? "successful" : "unsuccessful";
-    alert(`Copy to clipboard ${msg}`);
-  } catch (err) {
-    alert(`Oops, unable to copy`);
-  }
+  document.execCommand("copy");
 };
 </script>
 
