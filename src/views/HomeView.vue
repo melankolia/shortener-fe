@@ -21,11 +21,12 @@
       <div class="flex flex-col md:flex-row space-x-0 md:space-x-7 px-10">
         <div class="relative w-full">
           <div
-            class="flex z-10 absolute inset-y-0 left-0 items-center px-6 pointer-events-none border-r-2 border-gray-300 my-3 focus:ring-blue-500 focus:border-blue-500"
+            class="flex z-50 absolute inset-y-0 left-0 items-center px-6 pointer-events-none border-r-2 border-gray-300 my-3 focus:ring-blue-500 focus:border-blue-500"
           >
             <img style="width: 30px; height: 30px" src="@/assets/clip.svg" />
           </div>
           <input
+            v-model="inputLink"
             type="text"
             id="simple-search"
             class="border-2 h-14 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-24 pr-2"
@@ -53,13 +54,28 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import type { Ref } from "vue";
+import MainService from "@/shared/services/resources/home.services";
 
 const loading: Ref<boolean> = ref(false);
-const handleClick = (): void => {
-  loading.value = true;
-  setTimeout(() => {
+const inputLink: Ref<string> = ref("");
+
+const handleClick = async (): Promise<void> => {
+  try {
+    loading.value = true;
+    const result = await MainService.postData(inputLink.value);
+
+    const {
+      data: { status_code, link },
+    } = result;
+
+    if (status_code === 200) {
+      inputLink.value = `http://localhost:3000/lk/${link}`;
+    }
+  } catch (error) {
+    console.error(error);
+  } finally {
     loading.value = false;
-  }, 1500);
+  }
 };
 </script>
 
