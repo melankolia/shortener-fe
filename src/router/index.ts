@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from "vue-router";
+import { HOME, NOT_FOUND } from "@/shared/constants/router";
 
 const HomeView = () => import("../views/HomeView.vue");
 const ExpiredView = () => import("../views/ExpiredView.vue");
@@ -9,17 +10,17 @@ const router = createRouter({
   routes: [
     {
       path: "/",
-      name: "Home",
+      name: HOME.ROOT,
       component: HomeView,
     },
     {
       path: "/expired",
-      name: "Expired",
+      name: NOT_FOUND.ROOT,
       component: ExpiredView,
     },
     {
       path: "/not-found",
-      name: "Not Found",
+      name: NOT_FOUND.EXPIRED,
       component: NotFoundView,
     },
   ],
