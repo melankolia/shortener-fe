@@ -7,12 +7,14 @@
       <p class="body-1 text-white text-center pb-10">
         Page not found.
       </p>
+      <router-link to="/">
       <button
           class="rounded-lg  h-16 w-52  "
           style="background-color: #3ed078"
         >
           <span class="caption-1 text-white font-semibold"> Back to shortener </span>
         </button>
+      </router-link>
     </div>
    
     <div class="flex flex-col items-center justify-end h-1/2 mb-3">

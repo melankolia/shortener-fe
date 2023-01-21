@@ -10,7 +10,7 @@ import type {
 import type { MainInstanceTypes } from "@/shared/types/instance/main";
 
 const instance = axios.create({
-  baseURL: "http://localhost:3000/",
+  baseURL: "https://cawaproject.site/sr/",
 });
 
 instance.interceptors.response.use(

@@ -98,7 +98,7 @@ const handleClick = async (): Promise<void> => {
     } = result;
 
     if (status_code === 200) {
-      inputLink.value = `http://localhost:3000/lk/${link}`;
+      inputLink.value = `https://cawaproject.site/sr/lk/${link}`;
     }
   } catch (error) {
     console.error(error);

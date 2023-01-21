@@ -7,12 +7,14 @@
       <p class="body-1 text-white text-center pb-10">
         Your short link has expired, shorten your link again.
       </p>
+      <router-link to="/">
       <button
           class="rounded-lg  h-16 w-52  "
           style="background-color: #3ed078"
         >
           <span class="caption-1 text-white font-semibold"> Shorten again </span>
         </button>
+      </router-link>
     </div>
    
     <div class="flex flex-col items-center justify-end h-1/2 mb-3">
