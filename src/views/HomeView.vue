@@ -9,26 +9,44 @@
         go all the way down memory lane
       </p>
     </div>
+  
     <div class="flex flex-col items-center justify-end h-1/2 mb-3">
       <p class="subtitle-1 text-center">
         Copyright © 2023 cawaproject. <br class="block md:hidden" />
         All Right Reserved.
       </p>
     </div>
+
+   
+
+  
+   
     <div
       class="bg-white rounded-lg absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-3/4 h-52 shadow-input flex flex-col justify-center"
     >
+     <div>
+      <div v-if="alert" class="absolute -top-10 left-1 bg-slate-700 bg-opacity-80 text-white w-28 h-8  text-center ml-10 pt-1 mb-2  rounded-md">
+            <span class="mb-50">Link copied</span>
+          </div>
       <div class="flex flex-col md:flex-row space-x-0 md:space-x-7 px-10">
+        
         <div
-          class="flex flex-row border-2 h-14 border-gray-300 text-gray-900 text-sm rounded-lg w-full"
+          class="flex flex-row border-2 h-14 border-gray-300 text-gray-900 text-sm rounded-lg w-full "
         >
+        <div>
           <div
             @click="handleCopy"
-            class="hover:cursor-pointer flex inset-y-0 items-center px-6 border-r-2 border-gray-300 my-3"
+          
+            class="hover:cursor-pointer  flex inset-y-0 items-center  border-r-2 border-gray-300 mt-3.5 md:mt-2  ml-2 md:ml-2 pr-2 md:pr-2"
           >
-            <img style="width: 30px; height: 30px" src="@/assets/clip.svg" />
+            <img style="height: 30,width: 30"  src="@/assets/clip.svg" />
           </div>
-          <input
+        
+         
+          </div>
+          
+         
+            <input
             v-model="inputLink"
             type="text"
             id="simple-search"
@@ -36,11 +54,14 @@
             placeholder="Paste long url and short it"
             required
           />
+          
         </div>
+       
         <button
           @click="handleClick"
           class="btn-shorten flex flex-row justify-center items-center rounded-lg px-4 h-14 w-full md:w-1/6 mt-4 md:mt-0 bg-green-1 hover:bg-white text-white hover:text-green-1 border-2 ring-green-1 border-green-1 transition duration-150 ease-in-out"
         >
+
           <Transition>
             <div v-if="loading">
               <img class="mr-2 svg-hover" src="@/assets/loading-green.svg" />
@@ -50,16 +71,21 @@
           <span class="caption-1 font-semibold"> Shorten </span>
         </button>
       </div>
+     </div>
+
     </div>
   </div>
 </template>
 
-<script setup lang="ts">
+<script setup lang="ts" >
 import { ref } from "vue";
 import type { Ref } from "vue";
 import MainService from "@/shared/services/resources/home.services";
 
+
 const loading: Ref<boolean> = ref(false);
+const alert: Ref<boolean> = ref(false);
+
 const inputLink: Ref<string> = ref("");
 
 const handleClick = async (): Promise<void> => {
@@ -82,10 +108,15 @@ const handleClick = async (): Promise<void> => {
 };
 
 const handleCopy = (): void => {
+  alert.value = true;
   let codeToCopy = document.querySelector("#simple-search") as HTMLInputElement;
   codeToCopy.setAttribute("type", "text");
   codeToCopy.select();
   document.execCommand("copy");
+  
+  setTimeout(function() {
+    alert.value = false;
+  }, 1000);
 };
 </script>
 
@@ -98,6 +129,8 @@ const handleCopy = (): void => {
 .shadow-input {
   box-shadow: 0px 4px 15px rgba(1, 17, 183, 0.06);
 }
+
+
 
 .svg-hover {
   display: none;
